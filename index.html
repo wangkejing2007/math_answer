@@ -92,6 +92,11 @@
             font-weight: 800;
             color: #4ade80; /* 亮綠色突出顯示結果 */
         }
+        /* 突出顯示較佳的策略結果 */
+        .best-strategy {
+            background-color: #2a342e; /* 柔和的深綠色背景 */
+            border-left: 5px solid #4ade80;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -216,7 +221,7 @@
                                     <th>題號組別</th>
                                     <th>最多次出現的答案</th>
                                     <th>出現次數 (佔 25 題的比例)</th>
-                                </tr>
+                                    </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -240,8 +245,7 @@
                     </div>
                 </details>
 
-                <!-- Q3: 最佳猜題策略比較 -->
-                <!-- 移除 open 屬性，讓其預設為關閉狀態 -->
+                <!-- Q3: 最佳猜題策略比較 (奇偶分組 vs. 固定D) -->
                 <details class="rounded-lg shadow-md border border-gray-700">
                     <summary class="faq-question p-4 font-semibold text-lg rounded-t-lg flex justify-between items-center cursor-pointer">
                         <span class="font-extrabold accent-indigo">Q3: 最佳猜題策略比較：總是猜 "D" 還是根據單雙數猜 "E" 或 "D"？</span>
@@ -249,7 +253,7 @@
                     </summary>
                     <div class="faq-answer p-4 border-t border-gray-700 rounded-b-lg">
                         <p class="mb-3 text-gray-300 font-medium">
-                            假設您對某題完全沒有頭緒，且該題為隨機抽取（奇偶題機率各 50%），兩種策略的期望成功率計算如下：
+                            兩種基於歷史數據的最佳化策略比較：
                         </p>
                         
                         <!-- 策略比較表格 -->
@@ -263,13 +267,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="best-strategy">
                                     <td class="font-bold accent-indigo">策略 A (整體最佳)</td>
                                     <td>不論奇偶，一律猜 **D**</td>
                                     <td>15 次 (來自 Q1)</td>
                                     <td class="highlight-result">30.0%</td>
                                 </tr>
-                                <tr>
+                                <tr class="best-strategy">
                                     <td class="font-bold accent-indigo">策略 B (單雙數分組)</td>
                                     <td>奇數題猜 **E**；偶數題猜 **D**</td>
                                     <td>6 次 (奇數題) + 9 次 (偶數題) = 15 次 (來自 Q2)</td>
@@ -279,11 +283,113 @@
                         </table>
 
                         <p class="mt-4 text-sm text-gray-400">
-                            **結論：**
-                            根據 110-114 學年度的歷史數據，這兩種猜題策略的期望成功率**相同**，均為 **30.0%**。選擇任何一種，在統計上來說結果都會是一樣的。
+                            **結論：** 根據 110-114 學年度的歷史數據，這兩種猜題策略的期望成功率**相同**，均為 **30.0%**。
                         </p>
                         <p class="mt-2 text-sm text-yellow-500">
-                            **💡 額外建議：** 如果您確定該題是偶數題（Q2, 4, 6, 8, 10），則策略 B（猜 D）的成功率更高達 $9/25 = 36.0\%$。因此，策略 B 雖然整體成功率相同，但能提供更有針對性的猜題依據。
+                            **💡 額外建議：** 策略 B 在偶數題上的成功率高達 $9/25 = 36.0\%$，因此如果能判斷題號單雙數，策略 B 更具針對性。
+                        </p>
+                    </div>
+                </details>
+
+                <!-- Q4: 固定猜 D vs. 隨機猜 A/B/C/D/E (已修改) -->
+                <details class="rounded-lg shadow-md border border-gray-700">
+                    <summary class="faq-question p-4 font-semibold text-lg rounded-t-lg flex justify-between items-center cursor-pointer">
+                        <span class="font-extrabold accent-indigo">Q4: 固定猜 "D"，以及隨機從 A/B/C/D/E 當中選一個答案，哪一個答對的機率比較高？</span>
+                        <svg class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="faq-answer p-4 border-t border-gray-700 rounded-b-lg">
+                        <p class="mb-3 text-gray-300 font-medium">
+                            我們比較兩種最常見的「瞎猜」策略在 50 題歷史數據中的期望成功率：
+                        </p>
+                        
+                        <!-- 策略比較表格 -->
+                        <table class="faq-table">
+                            <thead>
+                                <tr>
+                                    <th>策略</th>
+                                    <th>猜題規則</th>
+                                    <th>歷史成功次數 (總題數 50)</th>
+                                    <th>期望成功率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="best-strategy">
+                                    <td class="font-bold accent-indigo">策略 A (固定猜 D)</td>
+                                    <td>每題一律猜 **D**</td>
+                                    <td>15 次</td>
+                                    <td class="highlight-result">30.0%</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold accent-indigo">策略 C (隨機猜 A/B/C/D/E)</td>
+                                    <td>隨機從 A, B, C, D, E 五個選項中選擇</td>
+                                    <td>
+                                        $$50 \times (1/5) = 10 \text{ 次}$$
+                                    </td>
+                                    <td class="highlight-result">20.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="mt-4 text-sm text-gray-400">
+                            **計算細節：**
+                            <ul class="list-disc list-inside ml-4 text-gray-400">
+                                <li>**固定猜 D：** 總共 50 題，D 為答案的次數是 15 次，成功率為 $15 \div 50 = 30.0\%$。</li>
+                                <li>**隨機猜 A/B/C/D/E：** 由於共有 50 題且每個選項的猜中機率都是 $1/5$（即 $20\%$），因此期望成功次數為 $50 \times (1/5) = 10$ 次，成功率為 $10 \div 50 = 20.0\%$。</li>
+                            </ul>
+                        </p>
+                        <p class="mt-2 text-lg font-extrabold text-red-400">
+                            **最終結論：**
+                            根據歷史數據，固定猜 **"D"** 的期望成功率（$30.0\%$）遠高於隨機猜 A/B/C/D/E（$20.0\%$）。
+                        </p>
+                    </div>
+                </details>
+
+                <!-- Q5: 最佳猜答案策略 -->
+                <details class="rounded-lg shadow-md border border-gray-700">
+                    <summary class="faq-question p-4 font-semibold text-lg rounded-t-lg flex justify-between items-center cursor-pointer">
+                        <span class="font-extrabold accent-indigo">Q5: 如果遇到不會的題目，你建議最佳的"猜答案策略"是甚麼？</span>
+                        <svg class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="faq-answer p-4 border-t border-gray-700 rounded-b-lg">
+                        <p class="mb-3 text-gray-300 font-medium">
+                            根據 110-114 學年度的歷史數據，我們建議以下兩種最佳猜題策略（總體期望成功率均為 $30.0\%$）：
+                        </p>
+                        
+                        <!-- 策略比較表格 -->
+                        <table class="faq-table">
+                            <thead>
+                                <tr>
+                                    <th>策略</th>
+                                    <th>猜題規則</th>
+                                    <th>總體期望成功率</th>
+                                    <th>特色 / 額外優勢</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-bold accent-indigo">策略 A (簡單粗暴)</td>
+                                    <td>不論題號，一律猜 **D**</td>
+                                    <td class="highlight-result">30.0%</td>
+                                    <td>執行最簡單，只需要記得一個答案。</td>
+                                </tr>
+                                <tr class="best-strategy">
+                                    <td class="font-bold accent-indigo">策略 B (區分奇偶)</td>
+                                    <td>**奇數題猜 E**；**偶數題猜 D**</td>
+                                    <td class="highlight-result">30.0%</td>
+                                    <td class="text-left font-semibold">
+                                        最佳化：偶數題 (Q2, 4, 6, 8, 10) 的成功率高達 **36.0%**，是單一組別中最高的機率。
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="mt-4 text-lg font-extrabold text-yellow-300">
+                            **結論與建議：**
+                            <br>
+                            我們強烈建議採用 **策略 B**。雖然總體成功率與策略 A 相同，但它利用了偶數題答案偏向 **D** 的規律性，能將偶數題的答對率提高到 $36.0\%$，是基於歷史數據的**最優化猜題策略**。
+                        </p>
+                        <p class="mt-2 text-sm text-gray-500">
+                            **注意：** 此分析僅基於 110-114 學年度共 50 題的單選題數據，下一年度的答案分佈可能有所不同。
                         </p>
                     </div>
                 </details>
