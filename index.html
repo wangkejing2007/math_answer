@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海聯會僑生考試 [數學科] 答案表 (110-114)</title>
+    <title>海聯會僑生考試數學科答案表</title>
     <!-- 載入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -15,7 +15,6 @@
             color: #c9d1d9; /* 淺灰色文字 (輝) */
             min-height: 100vh;
         }
-        /* 定義主要的藍色/紫色系作為「蘭」色調，現用於強調 */
         /* 將主標題顏色更改為純白色 #FFFFFF */
         .accent-white-title {
             color: #FFFFFF; 
@@ -62,6 +61,11 @@
             border-color: #30363d; /* 使用深色邊框來強化分隔 */
         }
 
+        /* 難易度顏色標示 */
+        .difficulty-easy { color: #4ade80; } /* 簡易: 亮綠色 */
+        .difficulty-medium { color: #facc15; } /* 中等: 黃色 */
+        .difficulty-hard { color: #f87171; } /* 困難: 紅色 */
+
         /* Q&A 區塊樣式 */
         .faq-question {
             background-color: #1f2a37; /* 比卡片背景稍微亮一點的顏色 */
@@ -97,6 +101,12 @@
             background-color: #2a342e; /* 柔和的深綠色背景 */
             border-left: 5px solid #4ade80;
         }
+        
+        /* 新增樣式：固定題號欄寬度 */
+        .q-number-col {
+            width: 4rem; /* 固定寬度，比 w-1/5 更窄 */
+            min-width: 4rem;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -114,16 +124,17 @@
             </p>
         </header>
 
-        <!-- 表格區域 -->
-        <!-- 強化整體框架感，邊框為 4 像素深灰色 -->
-        <div class="responsive-table-container bg-card shadow-xl rounded-xl p-0.5 border-4 border-gray-700 mb-12">
-            <!-- 移除 divide-y，改用單元格邊框 -->
+        <!-- 1. 答案表格區域 -->
+        <h2 class="text-xl font-bold accent-indigo mb-2 text-left">
+            單一選擇題 標準答案
+        </h2>
+        <div class="responsive-table-container bg-card shadow-xl rounded-xl p-0.5 border-4 border-gray-700 mb-8">
             <table class="min-w-full border-collapse border-4 border-gray-700">
                 <!-- 表格標頭 -->
                 <thead>
                     <tr class="text-sm uppercase tracking-wider bg-[#30363d]">
-                        <!-- 所有 th 加上 cell-border class 讓線條加粗 -->
-                        <th class="px-1 py-3 text-left w-1/5 question-number table-header-text cell-border">
+                        <!-- 應用 q-number-col class 來縮小寬度 -->
+                        <th class="px-1 py-3 text-left question-number table-header-text cell-border q-number-col">
                             題號
                         </th>
                         <th class="px-4 py-3 text-center table-header-text cell-border">114 學年</th>
@@ -141,7 +152,36 @@
             </table>
         </div>
         
-        <!-- Q&A 區塊 -->
+        <!-- 2. 難易度評分表 (新增) -->
+        <h2 class="text-xl font-bold accent-indigo mb-2 text-left">
+            難易度評分表 (簡易 / 中等 / 困難)
+        </h2>
+        <div class="responsive-table-container bg-card shadow-xl rounded-xl p-0.5 border-4 border-gray-700 mb-12">
+            <table class="min-w-full border-collapse border-4 border-gray-700">
+                <!-- 表格標頭 -->
+                <thead>
+                    <tr class="text-sm uppercase tracking-wider bg-[#30363d]">
+                        <!-- 應用 q-number-col class 來縮小寬度 -->
+                        <th class="px-1 py-3 text-left question-number table-header-text cell-border q-number-col">
+                            題號
+                        </th>
+                        <th class="px-4 py-3 text-center table-header-text cell-border">114 學年</th>
+                        <th class="px-4 py-3 text-center table-header-text cell-border">113 學年</th>
+                        <th class="px-4 py-3 text-center table-header-text cell-border">112 學年</th>
+                        <th class="px-4 py-3 text-center table-header-text cell-border">111 學年</th>
+                        <th class="px-4 py-3 text-center table-header-text cell-border">110 學年</th>
+                    </tr>
+                </thead>
+
+                <!-- 表格主體 -->
+                <tbody id="difficulty-table-body" class="text-gray-200">
+                    <!-- 難易度數據將由 JavaScript 渲染 -->
+                </tbody>
+            </table>
+        </div>
+
+        
+        <!-- 3. Q&A 區塊 -->
         <section class="mt-8">
             <h2 class="text-2xl font-bold accent-indigo mb-4 text-center">
                 常見問答 (Q&A) 區塊
@@ -221,7 +261,7 @@
                                     <th>題號組別</th>
                                     <th>最多次出現的答案</th>
                                     <th>出現次數 (佔 25 題的比例)</th>
-                                    </tr>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -291,7 +331,7 @@
                     </div>
                 </details>
 
-                <!-- Q4: 固定猜 D vs. 隨機猜 A/B/C/D/E (已修改) -->
+                <!-- Q4: 固定猜 D vs. 隨機猜 A/B/C/D/E (預設收合) -->
                 <details class="rounded-lg shadow-md border border-gray-700">
                     <summary class="faq-question p-4 font-semibold text-lg rounded-t-lg flex justify-between items-center cursor-pointer">
                         <span class="font-extrabold accent-indigo">Q4: 固定猜 "D"，以及隨機從 A/B/C/D/E 當中選一個答案，哪一個答對的機率比較高？</span>
@@ -344,7 +384,7 @@
                     </div>
                 </details>
 
-                <!-- Q5: 最佳猜答案策略 -->
+                <!-- Q5: 最佳猜答案策略 (預設收合) -->
                 <details class="rounded-lg shadow-md border border-gray-700">
                     <summary class="faq-question p-4 font-semibold text-lg rounded-t-lg flex justify-between items-center cursor-pointer">
                         <span class="font-extrabold accent-indigo">Q5: 如果遇到不會的題目，你建議最佳的"猜答案策略"是甚麼？</span>
@@ -394,6 +434,8 @@
                     </div>
                 </details>
                 
+                <!-- Q6 區塊將由 JavaScript 動態插入，確保其使用白色標題和計算數據 -->
+                
             </div>
 
         </section>
@@ -406,11 +448,11 @@
 
     <script>
         // Global variables for Firebase framework compliance
-        // Fix: Accessing global variables via 'window' prevents 'Cannot access before initialization' errors
         const __app_id = typeof window.__app_id !== 'undefined' ? window.__app_id : 'default-app-id';
         const __firebase_config = typeof window.__firebase_config !== 'undefined' ? window.__firebase_config : '{}';
         const __initial_auth_token = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : '';
 
+        // 1. 標準答案數據
         const answersData = [
             // 題號, 114, 113, 112, 111, 110
             { q: 1, a114: 'B', a113: 'B', a112: 'B', a111: 'D', a110: 'E' },
@@ -425,19 +467,116 @@
             { q: 10, a114: 'B', a113: 'E', a112: 'C', a111: 'D', a110: 'D' },
         ];
 
-        const tableBody = document.getElementById('answer-table-body');
+        // 2. 難易度評分數據 (E:簡易, M:中等, H:困難)
+        const difficultyData = [
+            // 題號, 114, 113, 112, 111, 110
+            { q: 1, d114: 'E', d113: 'E', d112: 'E', d111: 'E', d110: 'E', a114: 'B', a113: 'B', a112: 'B', a111: 'D', a110: 'E' },
+            { q: 2, d114: 'M', d113: 'E', d112: 'M', d111: 'M', d110: 'E', a114: 'D', a113: 'D', a112: 'E', a111: 'E', a110: 'C' },
+            { q: 3, d114: 'M', d113: 'M', d112: 'M', d111: 'M', d110: 'E', a114: 'A', a113: 'D', a112: 'C', a111: 'D', a110: 'E' },
+            { q: 4, d114: 'M', d113: 'M', d112: 'M', d111: 'H', d110: 'M', a114: 'B', a113: 'E', a112: 'C', a111: 'B', a110: 'D' },
+            { q: 5, d114: 'H', d113: 'H', d112: 'H', d111: 'H', d110: 'M', a114: 'E', a113: 'D', a112: 'E', a111: 'C', a110: 'C' },
+            { q: 6, d114: 'E', d113: 'M', d112: 'E', d111: 'E', d110: 'H', a114: 'A', a113: 'A', a112: 'B', a111: 'D', a110: 'E' },
+            { q: 7, d114: 'E', d113: 'M', d112: 'E', d111: 'M', d110: 'E', a114: 'C', a113: 'B', a112: 'A', a111: 'C', a110: 'B' },
+            { q: 8, d114: 'E', d113: 'E', d112: 'E', d111: 'M', d110: 'E', a114: 'D', a113: 'D', a112: 'D', a111: 'E', a110: 'A' },
+            { q: 9, d114: 'M', d113: 'M', d112: 'M', d111: 'E', d110: 'E', a114: 'E', a113: 'E', a112: 'D', a111: 'A', a110: 'A' },
+            { q: 10, d114: 'M', d113: 'E', d112: 'M', d111: 'M', d110: 'E', a114: 'B', a113: 'E', a112: 'C', a111: 'D', a110: 'D' },
+        ];
 
-        // 渲染表格
+        const tableBody = document.getElementById('answer-table-body');
+        const difficultyTableBody = document.getElementById('difficulty-table-body');
+
+        // 輔助函數：根據難易度代碼返回 HTML 字串和 class
+        function getDifficultyHtml(code) {
+            let text = '';
+            let className = '';
+            switch (code) {
+                case 'E':
+                    text = '簡易';
+                    className = 'difficulty-easy';
+                    break;
+                case 'M':
+                    text = '中等';
+                    className = 'difficulty-medium';
+                    break;
+                case 'H':
+                    text = '困難';
+                    className = 'difficulty-hard';
+                    break;
+                default:
+                    text = '';
+                    className = '';
+            }
+            return `<span class="font-bold text-sm ${className}">${text}</span>`;
+        }
+
+        // 函數：計算難易度分組的答案統計
+        function calculateDifficultyStats() {
+            const stats = {
+                'E': { total: 0, answers: { A: 0, B: 0, C: 0, D: 0, E: 0 } },
+                'M': { total: 0, answers: { A: 0, B: 0, C: 0, D: 0, E: 0 } },
+                'H': { total: 0, answers: { A: 0, B: 0, C: 0, D: 0, E: 0 } }
+            };
+
+            difficultyData.forEach(qItem => {
+                for (let year = 110; year <= 114; year++) {
+                    const dKey = `d${year}`; // Difficulty key (e.g., d114)
+                    const aKey = `a${year}`; // Answer key (e.g., a114)
+                    const difficulty = qItem[dKey];
+                    const answer = qItem[aKey];
+
+                    if (stats[difficulty]) {
+                        stats[difficulty].total++;
+                        if (stats[difficulty].answers[answer]) {
+                            stats[difficulty].answers[answer]++;
+                        } else {
+                            // Should not happen if data is clean, but safe guard
+                            stats[difficulty].answers[answer] = 1;
+                        }
+                    }
+                }
+            });
+            
+            // 計算每個難度組別的最佳答案
+            const results = {};
+            for (const diff in stats) {
+                const answerCounts = stats[diff].answers;
+                let maxCount = 0;
+                let bestAnswers = [];
+                
+                // 找出最大次數
+                for (const ans in answerCounts) {
+                    if (answerCounts[ans] > maxCount) {
+                        maxCount = answerCounts[ans];
+                    }
+                }
+                
+                // 找出所有達到最大次數的答案
+                for (const ans in answerCounts) {
+                    if (answerCounts[ans] === maxCount && maxCount > 0) {
+                        bestAnswers.push(ans);
+                    }
+                }
+
+                results[diff] = {
+                    total: stats[diff].total,
+                    maxCount: maxCount,
+                    bestAnswers: bestAnswers.join(' / '),
+                    successRate: stats[diff].total > 0 ? (maxCount / stats[diff].total) : 0,
+                    allCounts: answerCounts
+                };
+            }
+
+            return results;
+        }
+
+
+        // 渲染答案表格
         answersData.forEach(item => {
             const row = document.createElement('tr');
             row.classList.add('table-row');
             
-            // 題號
-            // 加上 cell-border class
-            row.innerHTML += `<td class="question-number px-4 py-3 text-left cell-border">${item.q}</td>`;
-            
-            // 各學年答案
-            // 所有 td 都加上 cell-border class，並使用蘭色強調答案
+            // 應用 q-number-col class
+            row.innerHTML += `<td class="question-number px-4 py-3 text-left cell-border q-number-col">${item.q}</td>`;
             row.innerHTML += `<td class="px-4 py-3 text-center font-bold text-lg accent-indigo cell-border">${item.a114}</td>`;
             row.innerHTML += `<td class="px-4 py-3 text-center font-bold text-lg accent-indigo cell-border">${item.a113}</td>`;
             row.innerHTML += `<td class="px-4 py-3 text-center font-bold text-lg accent-indigo cell-border">${item.a112}</td>`;
@@ -446,6 +585,109 @@
             
             tableBody.appendChild(row);
         });
+
+        // 渲染難易度評分表
+        difficultyData.forEach(item => {
+            const row = document.createElement('tr');
+            row.classList.add('table-row');
+            
+            // 應用 q-number-col class
+            row.innerHTML += `<td class="question-number px-4 py-3 text-left cell-border q-number-col">${item.q}</td>`;
+            // 使用輔助函數來顯示顏色和文字
+            row.innerHTML += `<td class="px-4 py-3 text-center cell-border">${getDifficultyHtml(item.d114)}</td>`;
+            row.innerHTML += `<td class="px-4 py-3 text-center cell-border">${getDifficultyHtml(item.d113)}</td>`;
+            row.innerHTML += `<td class="px-4 py-3 text-center cell-border">${getDifficultyHtml(item.d112)}</td>`;
+            row.innerHTML += `<td class="px-4 py-3 text-center cell-border">${getDifficultyHtml(item.d111)}</td>`;
+            row.innerHTML += `<td class="px-4 py-3 text-center cell-border">${getDifficultyHtml(item.d110)}</td>`;
+            
+            difficultyTableBody.appendChild(row);
+        });
+
+        // 處理 Q6 邏輯並動態插入 HTML (確保使用白色標題)
+        window.onload = function() {
+            const stats = calculateDifficultyStats();
+            
+            // Q6 HTML 內容
+            const q6Html = `
+                <p class="mb-3 text-gray-300 font-medium">
+                    根據 110 至 114 學年度共 50 題的難易度分組統計，各組中最常出現的標準答案如下：
+                </p>
+                
+                <!-- 難易度分組統計結果表格 -->
+                <table class="faq-table">
+                    <thead>
+                        <tr>
+                            <th>難易度</th>
+                            <th>該組總題數 (50 題中)</th>
+                            <th>最多次出現的答案</th>
+                            <th>出現次數</th>
+                            <th>該組成功率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold difficulty-easy">簡易 (E)</td>
+                            <td>${stats['E'].total} 題</td>
+                            <td class="font-bold text-xl text-yellow-300">${stats['E'].bestAnswers}</td>
+                            <td>${stats['E'].maxCount} 次</td>
+                            <td>${(stats['E'].successRate * 100).toFixed(1)}%</td>
+                        </tr>
+                        <tr class="best-strategy">
+                            <td class="font-bold difficulty-medium">中等 (M)</td>
+                            <td>${stats['M'].total} 題</td>
+                            <td class="font-bold text-xl text-yellow-300">${stats['M'].bestAnswers}</td>
+                            <td>${stats['M'].maxCount} 次</td>
+                            <td>${(stats['M'].successRate * 100).toFixed(1)}%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold difficulty-hard">困難 (H)</td>
+                            <td>${stats['H'].total} 題</td>
+                            <td class="font-bold text-xl text-yellow-300">${stats['H'].bestAnswers}</td>
+                            <td>${stats['H'].maxCount} 次</td>
+                            <td>${(stats['H'].successRate * 100).toFixed(1)}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="mt-4 text-sm text-gray-400">
+                    **詳細分析 (由高到低):**
+                    <ul class="list-disc list-inside ml-4 text-gray-400">
+                        <li>**簡易 (E, 共 ${stats['E'].total} 題)：** ${Object.entries(stats['E'].allCounts).sort(([, a], [, b]) => b - a).map(([ans, count]) => `${ans} (${count} 次, ${(count / stats['E'].total * 100).toFixed(1)}%)`).join(' > ')}
+                        </li>
+                        <li>**中等 (M, 共 ${stats['M'].total} 題)：** ${Object.entries(stats['M'].allCounts).sort(([, a], [, b]) => b - a).map(([ans, count]) => `${ans} (${count} 次, ${(count / stats['M'].total * 100).toFixed(1)}%)`).join(' > ')}
+                        </li>
+                        <li>**困難 (H, 共 ${stats['H'].total} 題)：** ${Object.entries(stats['H'].allCounts).sort(([, a], [, b]) => b - a).map(([ans, count]) => `${ans} (${count} 次, ${(count / stats['H'].total * 100).toFixed(1)}%)`).join(' > ')}
+                        </li>
+                    </ul>
+                </p>
+                <p class="mt-2 text-lg font-extrabold text-red-400">
+                    **結論與猜題建議：**
+                    <br>
+                    如果在考場上能判斷題目的難易度：
+                    <br>
+                    1. 遇到<span class="difficulty-medium">「中等」</span>難度的題目，猜 **D** 會有 <span class="highlight-result">${(stats['M'].successRate * 100).toFixed(1)}%</span> 的期望成功率。
+                    2. 遇到<span class="difficulty-hard">「困難」</span>難度的題目，猜 **E** 竟有 <span class="highlight-result">${(stats['H'].successRate * 100).toFixed(1)}%</span> 的期望成功率 (但困難題樣本數極少，僅 ${stats['H'].total} 題，參考性較低)。
+                    3. 遇到<span class="difficulty-easy">「簡易」</span>難度的題目，猜 **${stats['E'].bestAnswers}** 都可以，成功率均為 <span class="highlight-result">${(stats['E'].successRate * 100).toFixed(1)}%</span>。
+                </p>
+            `;
+
+            // 將 Q6 插入到 FAQ 容器
+            const faqContainer = document.getElementById('faq-container');
+            const q6Details = document.createElement('details');
+            q6Details.classList.add('rounded-lg', 'shadow-md', 'border', 'border-gray-700');
+            
+            // *** 這裡將標題顏色從 accent-indigo 更改為 accent-white-title ***
+            q6Details.innerHTML = `
+                <summary class="faq-question p-4 font-semibold text-lg rounded-t-lg flex justify-between items-center cursor-pointer">
+                    <span class="font-extrabold accent-white-title">Q6: 根據每道題目的難易程度 (簡易、中等、困難)，其對應的答案出現機率最高的答案是甚麼？</span>
+                    <svg class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="faq-answer p-4 border-t border-gray-700 rounded-b-lg">
+                    ${q6Html}
+                </div>
+            `;
+            faqContainer.appendChild(q6Details);
+        };
         
     </script>
 </body>
